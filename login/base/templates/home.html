@@ -1,5 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
-hola soy el dashboard! :D
+<div class="prueba">ola</div>
+<div class="sidebar">
+  <div class="top">
+    <div class="logo">
+      <i class="bx bxl-codepen"></i>
+      <span>WorkMate</span>
+    </div>
+    <i class="bx bx-menu" id="btn"></i>
+  </div>
+  <div class="user">
+    <img src="static/user-img.jpg" alt="me" class="user-img">
+    <div>
+      <p class="bold">Clint B.</p>
+      <p>Admin</p>
+    </div>
+  </div>
+  <ul>
+    <li>
+      <a href="#">
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Gestion de Tareas</span>
+      </a>
+      <span class="tooltip">Gestion de Tareas</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Gestion de Usuarios</span>
+      </a>
+      <span class="tooltip">Gestion de Usuarios</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Crear Nueva Tarea</span>
+      </a>
+      <span class="tooltip">Crear Nueva Tarea</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Mis Tareas</span>
+      </a>
+      <span class="tooltip">Mis Tareas</span>
+    </li>
+    <li>
+      <a href="{% url "base:logout" %}">
+        <i class="bx bx-log-out"></i>
+        <span class="nav-item">Cerrar sesion</span>
+      </a>
+      <span class="tooltip">Cerrar sesion</span>
+    </li>
+  </ul>
+</div>
+{% comment %}
 <a href="{% url "base:logout" %}">Cerrar sesión</a>
+{% endcomment %}
 {% endblock content %}
