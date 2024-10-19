@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-hola soy el dashboard! :D
-<a href="{% url "base:logout" %}">Cerrar sesión</a>
+<h1>Hola soy el dashboard! :D</h1>
+<form method="POST" action="{% url 'base:logout' %}">
+    {% csrf_token %}
+    <button type="submit">Cerrar sesión</button>
+</form>
 {% endblock content %}
