@@ -1,0 +1,90 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkMate!</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="top">
+      <div class="logo">
+        <i class="bx bxl-codepen"></i>
+        <span>WorkMate</span>
+      </div>
+      <i class="bx bx-menu" id="btn"></i>
+    </div>
+    <div class="user">
+      <img src="{% static " user-img.jpg" %}" alt="me" class="user-img">
+      <div>
+        <p class="bold">Omar Pacheco</p>
+        <p>Admin</p>
+      </div>
+    </div>
+    <ul>
+      <li>
+        <a href="/">
+          <i class="bx bxs-grid-alt"></i>
+          <span class="nav-item">Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a href="/gestion-tareas/">
+          <i class="bx bx-task"></i>
+          <span class="nav-item">Gestion de Tareas</span>
+        </a>
+        <span class="tooltip">Gestion de Tareas</span>
+      </li>
+      <li>
+        <a href="/gestion-usuarios/">
+          <i class="bx bxs-user-account"></i>
+          <span class="nav-item">Gestion de Usuarios</span>
+        </a>
+        <span class="tooltip">Gestion de Usuarios</span>
+      </li>
+      <li>
+        <a href="/crear-nueva-tarea/">
+          <i class="bx bxs-edit"></i>
+          <span class="nav-item">Crear Nueva Tarea</span>
+        </a>
+        <span class="tooltip">Crear Nueva Tarea</span>
+      </li>
+      <li>
+        <a href="/mis-tareas/">
+          <i class="bx bxs-notepad"></i>
+          <span class="nav-item">Mis Tareas</span>
+        </a>
+        <span class="tooltip">Mis Tareas</span>
+      </li>
+      <li>
+        <a href="{% url " base:logout" %}">
+          <i class="bx bx-log-out"></i>
+          <span class="nav-item">Cerrar sesion</span>
+        </a>
+        <span class="tooltip">Cerrar sesion</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="container">
+      <h1>Mis Tareas</h1>
+    </div>
+  </div>
+</body>
+
+<script>
+  let btn = document.querySelector('#btn');
+  let sidebar = document.querySelector('.sidebar');
+
+  btn.onclick = function () {
+    sidebar.classList.toggle('active');
+  };
+</script>
+
+</html>
