@@ -71,9 +71,32 @@
 
     <div class="main-content">
       <div class="container">
-        <h1>Gestion de Usuarios</h1>
+          <h1>Gestion de Usuarios</h1>
+  
+          <!-- User Creation Form -->
+          <form method="POST" action="{% url 'base:crear-usuario' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Create User</button>
+        </form>
+  
+          <!-- User Grid -->
+        <div class="user-grid">
+          {% for user in users %}
+          <div class="user-card">
+              <h3>{{ user.username }}</h3>
+              <p>Email: {{ user.email }}</p>
+              <p>Description: {{ user.description }}</p>
+              <a href="{% url 'base:editar-usuario' user.id %}" class="edit-button">Edit</a>
+          </div>
+          {% empty %}
+          <p>No users found.</p>
+          {% endfor %}
+        </div>
+
       </div>
-    </div>
+  </div>
+1  
   </body>
 
   <script>

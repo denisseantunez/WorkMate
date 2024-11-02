@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User - WorkMate!</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">        
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Sidebar content -->
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>Edit User: {{ user.username }}</h1>
+
+            <form method="POST" action="{% url 'base:gestion_usuarios' %}">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save Changes</button>
+                <a href="{% url 'base:gestion_usuarios' %}" class="cancel-button">Cancel</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

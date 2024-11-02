@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'workmates',
     'base'
 ]
+
+AUTH_USER_MODEL = 'workmates.workmateUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
