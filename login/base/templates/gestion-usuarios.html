@@ -80,14 +80,16 @@
           <button type="submit">Create User</button>
         </form>
   
-          <!-- User Grid -->
         <div class="user-grid">
           {% for user in users %}
           <div class="user-card">
-              <h3>{{ user.username }}</h3>
+              <h3> {{user.first_name}} {{user.last_name}}</h3>
+              <p>{{ user.username }}</p>
               <p>Email: {{ user.email }}</p>
               <p>Description: {{ user.description }}</p>
-              <a href="{% url 'base:editar-usuario' user.id %}" class="edit-button">Edit</a>
+              <a href="{% url 'base:editar-usuario' user.id %}" class="edit-button"">Edit</a>
+              <button class="default" onclick="btnclick()" id="myButton">Show name</button><br>
+        
           </div>
           {% empty %}
           <p>No users found.</p>
@@ -106,5 +108,16 @@
     btn.onclick = function () {
       sidebar.classList.toggle('active');
     };
+  </script>
+  <script>
+    <!--unfished cable-->
+    function btnclick() {
+      var x = document.getElementById("namehidden");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+  }
   </script>
 </html>
