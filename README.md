@@ -17,3 +17,8 @@ A veces, en linux o macos no esta configurado python, si no python3. En esos cas
 ```bash
 python3 manage.py runserver
 ```
+Cuenta de acceso para la rama de JORGE
+```bash
+username: wmadmin
+password: password
+```
