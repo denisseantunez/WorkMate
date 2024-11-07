@@ -1,5 +1,7 @@
 from django.db import models
 from django import forms
+from django.forms import ModelChoiceField
+from workmates.models import workmateUser
 
 class Tasks(models.Model):
     class Urgency (models.IntegerChoices):
@@ -23,4 +25,13 @@ class Tasks(models.Model):
     def __str__(self):
         return self.description, self.category, self.priority, self.notes
 
+
+class TaskProfile(models.Model):
+    class wmusers(forms.ModelChoiceField):
+        def label_from_instance(self, obj):
+            return "{0} {1}".format(obj.first_name,obj.last_name)
+        
+    listofwm = wmusers(queryset = workmateUser.objects.all())
+    def __str__(self):
+        return self.listofwm
 # Create your models here.
