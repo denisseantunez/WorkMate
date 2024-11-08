@@ -84,18 +84,18 @@
         <div class="user-grid">
           {% for user in users %}
           <div class="user-card">
-              <h3> {{user.first_name}} {{user.last_name}}</h3>
+              <h3 id="namehidden-{{ user.id }}" style="display: none;">{{ user.first_name }} {{ user.last_name }}</h3>
               <p>{{ user.username }}</p>
               <p>Email: {{ user.email }}</p>
               <p>Description: {{ user.description }}</p>
-              <a href="{% url 'base:editar-usuario' user.id %}" class="edit-button"">Edit</a>
-              <button class="default" onclick="btnclick()" id="myButton">Show name</button><br>
-        
+              <a href="{% url 'base:editar-usuario' user.id %}" class="edit-button">Edit</a>
+              <button class="default" onclick="toggleName('namehidden-{{ user.id }}')">Show name</button><br>
           </div>
           {% empty %}
           <p>No users found.</p>
           {% endfor %}
         </div>
+        
 
       </div>
   </div>
@@ -111,14 +111,14 @@
     };
   </script>
   <script>
-    <!--unfished cable-->
-    function btnclick() {
-      var x = document.getElementById("namehidden");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-  }
+    function toggleName(id) {
+      var element = document.getElementById(id);
+      if (element.style.display === "none") {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    }
   </script>
+  
 </html>

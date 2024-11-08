@@ -34,8 +34,8 @@ def mis_tareas(request):
 
 @login_required
 def gestion_usuarios(request):
-    users = workmateUser.objects.all()  # Fetch all users from the custom model
-    return render(request, "gestion-usuarios.html", {'users': users})  # Pass 'users' to the template as a dictionary
+    users = workmateUser.objects.all()  
+    return render(request, "gestion-usuarios.html", {'users': users})
 
 
 @login_required
@@ -50,6 +50,7 @@ def gestion_crearusuario(request):
         form = WorkmateUserCreationForm()
     
     return render(request, "gestion-usuarios.html", {'form': form})
+
 @login_required
 def crear_usuario(request):
     if request.method == 'POST':
