@@ -27,11 +27,10 @@ class Tasks(models.Model):
 
 
 class TaskProfile(models.Model):
-    class wmusers(forms.ModelChoiceField):
-        def label_from_instance(self, obj):
-            return "{0} {1}".format(obj.first_name,obj.last_name)
-        
-    listofwm = wmusers(queryset = workmateUser.objects.all())
+    user = models.ForeignKey(workmateUser, on_delete=models.CASCADE)
+    task = models.ForeignKey(Tasks, on_delete=models.CASCADE)
+
     def __str__(self):
-        return self.listofwm
+        return f"{self.user.first_name} {self.user.last_name} - {self.task.description}"
+
 # Create your models here.
