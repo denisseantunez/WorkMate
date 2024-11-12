@@ -10,20 +10,23 @@ class Tasks(models.Model):
         LV3 = 3, "Level 3"
         LV4 = 4, "Level 4"
         LV5 = 5, "Level 5"
-    class Categories (models.TextChoices):
+    Categories = {
         ("TECH", "Tecnologico"),
         ("ADMIN", "Administrativo"),
         ("DEV", "Desarrollo"),
-        ("TEAM", "WorkMate Internal")
+        ("TEAM", "WorkMate Internal"),
         ("OTHER", "Otro/No Listado")
-
+    }
+    
+    title = models.TextField(max_length = 300, blank=False)
     description = models.TextField(max_length = 600, blank=False)
-    category = forms.ChoiceField(choices=Categories)
+    category = models.CharField(max_length = 20,choices=Categories)
     priority = models.IntegerField(default=Urgency.LV1, choices=Urgency, blank=False)
     notes = models.TextField(max_length = 300, blank=True)
+    user = models.ForeignKey(workmateUser, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.description, self.category, self.priority, self.notes
+        return self.title, self.description, self.category, self.priority, self.notes, self.user.first_name, self.user.last_name
 
 
 class TaskProfile(models.Model):

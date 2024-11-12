@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from workmates.models import workmateUser
-from .form import WorkmateUserCreationForm
+from tasks.models import Tasks
+from .form import WorkmateUserCreationForm, WorkmateTaskCreationForm
 
 
 @login_required
@@ -12,7 +13,8 @@ def home(request):
 
 @login_required
 def gestion_tareas(request):
-    return render(request, "gestion-tareas.html", {})
+    tasks = Tasks.objects.all()
+    return render(request, "gestion-tareas.html", {'tasks': tasks})
 
 
 @login_required
@@ -80,5 +82,16 @@ def editar_usuario(request, user_id):
 
 @login_required
 def gestionar_tareas(request):
-    
     return render(request, 'gestion-tareas.html', {})
+
+@login_required
+def crear_tarea(request):
+    if request.method == 'POST':
+        form = WorkmateTaskCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Task created successfully")
+            return redirect('gestion-tareas')
+    else:
+        form = WorkmateTaskCreationForm()
+    return render(request, 'crear-nueva-tarea.html', {'form': form})

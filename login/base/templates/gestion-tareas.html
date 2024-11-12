@@ -66,6 +66,25 @@
     <div class="main-content">
       <div class="container">
         <h1>Gestion de Tareas</h1>
+        <form method="POST" action="{% url 'base:crear-tarea' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Crear Tarea</button>
+          </form>
+          <div class="user-grid">
+            {% for task in tasks %}
+            <div class="user-card">
+              <h3>{{ task.title }}</h3>
+              <p> {{ task.description }}</p>
+              <p> {{ task.category }}</p>
+              <p> Priority: Level {{ task.priority }}</p>
+              <p> Assigned to: {{task.user.first_name}} {{ task.user.last_name }}</p>
+            </div>
+            {% empty %}
+            <h3> No tasks in database </h3>
+            {% endfor %}
+          </div>
+
       </div>
     </div>
   </body>

@@ -50,13 +50,6 @@
         <span class="tooltip">Gestion de Usuarios</span>
       </li>
       <li>
-        <a href="/crear-nueva-tarea/">
-          <i class="bx bxs-edit"></i>
-          <span class="nav-item">Crear Nueva Tarea</span>
-        </a>
-        <span class="tooltip">Crear Nueva Tarea</span>
-      </li>
-      <li>
         <a href="/mis-tareas/">
           <i class="bx bxs-notepad"></i>
           <span class="nav-item">Mis Tareas</span>
@@ -76,7 +69,12 @@
   <div class="main-content">
     <div class="container">
       <h1>Crear Nueva Tarea</h1>
-    </div>
+      <div class="container">
+        <form method="POST" action="{% url 'base:crear-tarea' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Crear tarea</button>
+        </form>
   </div>
 </body>
 
