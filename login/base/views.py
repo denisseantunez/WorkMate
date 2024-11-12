@@ -77,3 +77,8 @@ def editar_usuario(request, user_id):
         form = WorkmateUserCreationForm(instance=user)
 
     return render(request, 'editar-usuario.html', {'form': form, 'user': user})
+
+@login_required
+def gestionar_tareas(request):
+    
+    return render(request, 'gestion-tareas.html', {})
