@@ -32,7 +32,8 @@ def crear_nueva_tarea(request):
 
 @login_required
 def mis_tareas(request):
-    return render(request, "mis-tareas.html", {})
+    mytasks = Tasks.objects.all()
+    return render(request, "mis-tareas.html", {'mytasks': mytasks})
 
 @login_required
 def gestion_usuarios(request):

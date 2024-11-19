@@ -68,6 +68,15 @@
   <div class="main-content">
     <div class="container">
       <h1>Mis Tareas</h1>
+      <div class="user-grid">
+        <div class=""user-card">
+          {% for mytask in mytasks %}
+
+          {% empty %}
+          <p>No tasks assigned at the moment.</p>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
 </body>

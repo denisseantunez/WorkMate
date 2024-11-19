@@ -74,6 +74,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Crear tarea</button>
+            <a href="{% url 'base:gestion_tareas' %}" class="cancel-button">Cancel</a>
         </form>
   </div>
 </body>

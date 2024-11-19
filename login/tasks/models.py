@@ -10,6 +10,12 @@ class Tasks(models.Model):
         LV3 = 3, "Level 3"
         LV4 = 4, "Level 4"
         LV5 = 5, "Level 5"
+
+    class Completion (models.IntegerChoices):
+        Completed = 1, "Completed"
+        Incomplete = 2, "Incomplete"
+        NotStarted = 3, "Not started"
+
     Categories = {
         ("TECH", "Tecnologico"),
         ("ADMIN", "Administrativo"),
@@ -24,9 +30,10 @@ class Tasks(models.Model):
     priority = models.IntegerField(default=Urgency.LV1, choices=Urgency, blank=False)
     notes = models.TextField(max_length = 300, blank=True)
     user = models.ForeignKey(workmateUser, on_delete=models.CASCADE)
+    progress = models.IntegerField(default=Completion.NotStarted, choices=Completion, blank=False)
 
     def __str__(self):
-        return self.title, self.description, self.category, self.priority, self.notes, self.user.first_name, self.user.last_name
+        return self.title, self.description, self.category, self.priority, self.notes, self.user.first_name, self.user.last_name, self.progress
 
 
 class TaskProfile(models.Model):

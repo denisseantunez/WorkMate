@@ -14,7 +14,7 @@ class WorkmateUserCreationForm(UserCreationForm):
 class WorkmateTaskCreationForm(ModelForm):
     class Meta:
         model = Tasks
-        fields = ('title', 'description', 'category', 'priority', 'user')
+        fields = ('title', 'description', 'category', 'priority', 'user', 'progress')
 
     def save(self, commit=True):
         task = super().save(commit=False)

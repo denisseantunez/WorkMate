@@ -75,10 +75,11 @@
             {% for task in tasks %}
             <div class="user-card">
               <h3>{{ task.title }}</h3>
-              <p> {{ task.description }}</p>
-              <p> {{ task.category }}</p>
+              <p> Description: {{ task.description }}</p>
+              <p> Category: {{ task.category }}</p>
               <p> Priority: Level {{ task.priority }}</p>
               <p> Assigned to: {{task.user.first_name}} {{ task.user.last_name }}</p>
+              <p> Progress: {{ task.progress }}</p>
             </div>
             {% empty %}
             <h3> No tasks in database </h3>
