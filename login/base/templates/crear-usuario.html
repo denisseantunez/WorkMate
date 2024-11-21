@@ -42,8 +42,8 @@
     <div class="main-content">
         <div class="container">
             <h1>Create New User</h1>
-            <a href="{% url 'base:gestion-usuarios' %}" class="cancel-btn">Cancel</a> <!-- Cancel Button -->
-            <form method="POST" action="{% url 'base:crear-usuario' %}">
+            <a href="{% url 'base:gestion_usuarios' %}" class="cancel-btn">Cancel</a> <!-- Cancel Button -->
+            <form method="POST" action="{% url 'base:crear_usuario' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Create User</button>

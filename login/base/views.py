@@ -10,19 +10,25 @@ from .form import WorkmateUserCreationForm, WorkmateTaskCreationForm
 def home(request):
     return render(request, "base.html", {})
 
-
 @login_required
 def gestion_tareas(request):
-    tasks = Tasks.objects.all()
-    return render(request, "gestion-tareas.html", {'tasks': tasks})
+    tasks = Tasks.objects.all()  # Fetch all tasks
 
+    if request.method == 'POST':
+        # Handle the task edit form submission
+        task_id = request.POST.get('task_id')
+        task = get_object_or_404(Tasks, id=task_id)
+        form = WorkmateTaskCreationForm(request.POST, instance=task)
 
-@login_required
-def gestion_usuarios(request):
-    users = workmateUser.objects.all()
-    print("Users:", users)
-    return render(request, "gestion-usuarios.html", {'users', users})
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Task updated successfully!')
+            return redirect('base:gestion_tareas')
 
+    else:
+        form = WorkmateTaskCreationForm()
+
+    return render(request, "gestion-tareas.html", {'tasks': tasks, 'form': form})
 
 
 @login_required
@@ -61,7 +67,7 @@ def crear_usuario(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'User created successfully!')
-            return redirect('gestion-usuarios') 
+            return redirect('base:gestion-usuarios') 
     else:
         form = WorkmateUserCreationForm()
     
@@ -75,15 +81,11 @@ def editar_usuario(request, user_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'User updated successfully!')
-            return redirect('gestion-usuarios')
+            return redirect('base:gestion-usuarios')
     else:
         form = WorkmateUserCreationForm(instance=user)
 
     return render(request, 'editar-usuario.html', {'form': form, 'user': user})
-
-@login_required
-def gestionar_tareas(request):
-    return render(request, 'gestion-tareas.html', {})
 
 @login_required
 def crear_tarea(request):
@@ -92,7 +94,21 @@ def crear_tarea(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Task created successfully")
-            return redirect('gestion-tareas')
+            return redirect('base:gestion_tareas')
     else:
         form = WorkmateTaskCreationForm()
     return render(request, 'crear-nueva-tarea.html', {'form': form})
+
+@login_required
+def editar_tarea(request, task_id):
+    task = get_object_or_404(Tasks, id=task_id)
+
+    if request.method == 'POST':
+        form = WorkmateTaskCreationForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Task updated successfully!')
+            return redirect('gestion_tareas') 
+    else:
+        form = WorkmateTaskCreationForm(instance=task) 
+    return render(request, 'editar-tarea.html', {'form': form, 'task': task})

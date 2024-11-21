@@ -65,29 +65,47 @@
 
     <div class="main-content">
       <div class="container">
-        <h1>Gestion de Tareas</h1>
-        <form method="POST" action="{% url 'base:crear-tarea' %}">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit">Crear Tarea</button>
-          </form>
+          <h1>Gestion de Tareas</h1>
+          <a href="{% url 'base:crear-tarea' %}" class="edit-btn">Crear Tarea</a>
           <div class="user-grid">
-            {% for task in tasks %}
-            <div class="user-card">
-              <h3>{{ task.title }}</h3>
-              <p> Description: {{ task.description }}</p>
-              <p> Category: {{ task.category }}</p>
-              <p> Priority: Level {{ task.priority }}</p>
-              <p> Assigned to: {{task.user.first_name}} {{ task.user.last_name }}</p>
-              <p> Progress: {{ task.progress }}</p>
-            </div>
-            {% empty %}
-            <h3> No tasks in database </h3>
-            {% endfor %}
+              {% for task in tasks %}
+              <div class="user-card">
+                  <h3>{{ task.title }}</h3>
+                  <p> Description: {{ task.description }}</p>
+                  <p> Category: {{ task.category }}</p>
+                  <p> Priority: Level {{ task.priority }}</p>
+                  <p> Assigned to: {{ task.user.first_name }} {{ task.user.last_name }}</p>
+                  <p> Progress: {{ task.progress }}</p>
+                  <button class="edit-btn" onclick="openEditPane({{ task.id }})">Edit</button>
+              </div>
+              {% empty %}
+              <h3>No tasks available</h3>
+              {% endfor %}
           </div>
 
+          <div id="edit-pane" class="sliding-pane" style="display: none;">
+              <form method="POST" action="{% url 'base:gestion_tareas' %}">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <input type="hidden" name="task_id" id="task-id-input">
+                  <button type="submit">Save Changes</button>
+                  <button type="button" onclick="closeEditPane()">Cancel</button>
+              </form>
+          </div>
       </div>
-    </div>
+  </div>
+  <script>
+    // Open the edit pane
+    function openEditPane(taskId) {
+        document.getElementById("task-id-input").value = taskId;
+        document.getElementById("edit-pane").style.display = 'block';
+    }
+
+    // Close the edit pane
+    function closeEditPane() {
+        document.getElementById("edit-pane").style.display = 'none';
+    }
+  </script>
   </body>
 
   <script>
