@@ -73,6 +73,7 @@
                   <h3>{{ task.title }}</h3>
                   <p> Description: {{ task.description }}</p>
                   <p> Category: {{ task.category }}</p>
+                  <p> Date limit: {{ task.datelimit }}</p>
                   <p> Priority: Level {{ task.priority }}</p>
                   <p> Assigned to: {{ task.user.first_name }} {{ task.user.last_name }}</p>
                   <p> Progress: {{ task.progress }}</p>
@@ -95,13 +96,11 @@
       </div>
   </div>
   <script>
-    // Open the edit pane
     function openEditPane(taskId) {
         document.getElementById("task-id-input").value = taskId;
         document.getElementById("edit-pane").style.display = 'block';
     }
 
-    // Close the edit pane
     function closeEditPane() {
         document.getElementById("edit-pane").style.display = 'none';
     }

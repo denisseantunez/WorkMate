@@ -4,51 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create User - WorkMate!</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="sidebar">
         <div class="top">
-            <div class="logo">
-                <i class="bx bxl-codepen"></i>
-                <span>WorkMate</span>
-            </div>
-            <i class="bx bx-menu" id="btn"></i>
+          <div class="logo">
+            <i class="bx bxl-codepen"></i>
+            <span>WorkMate</span>
+          </div>
+          <i class="bx bx-menu" id="btn"></i>
         </div>
         <div class="user">
-            <img src="{% static "user-img.jpg" %}" alt="me" class="user-img">
-            <div>
-                {% if user.is_authenticated %}
-                <p class="bold">Hello, {{user.username}}</p>
-                {% endif %}
-            </div>
+          <img src="{% static "user-img.jpg" %}" alt="me" class="user-img">
+          <div>
+            {% if user.is_authenticated %}
+            <p class="bold">Hello, {{user.username}}</p>
+            {% endif %}
+          </div>
         </div>
         <ul>
-            <li><a href="/"><i class="bx bxs-grid-alt"></i><span class="nav-item">Dashboard</span></a></li>
-            <li><a href="/gestion-tareas/"><i class="bx bx-task"></i><span class="nav-item">Gestion de Tareas</span></a></li>
-            <li><a href="/gestion-usuarios/"><i class="bx bxs-user-account"></i><span class="nav-item">Gestion de Usuarios</span></a></li>
-            <li><a href="/crear-nueva-tarea/"><i class="bx bxs-edit"></i><span class="nav-item">Crear Nueva Tarea</span></a></li>
-            <li><a href="/mis-tareas/"><i class="bx bxs-notepad"></i><span class="nav-item">Mis Tareas</span></a></li>
-            <li>
-                <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
-                    {% csrf_token %}
-                    <button type="submit" aria-label="Logout">Cerrar sesión</button>
-                </form>
-            </li>
+          <li>
+            <a href="/">
+              <i class="bx bxs-grid-alt"></i>
+              <span class="nav-item">Dashboard</span>
+            </a>
+            <span class="tooltip">Dashboard</span>
+          </li>
+          <li>
+            <a href="/gestion-tareas/">
+              <i class="bx bx-task"></i>
+              <span class="nav-item">Gestion de Tareas</span>
+            </a>
+            <span class="tooltip">Gestion de Tareas</span>
+          </li>
+          <li>
+            <a href="/gestion-usuarios/">
+              <i class="bx bxs-user-account"></i>
+              <span class="nav-item">Gestion de Usuarios</span>
+            </a>
+            <span class="tooltip">Gestion de Usuarios</span>
+          </li>
+          <li>
+            <a href="/mis-tareas/">
+              <i class="bx bxs-notepad"></i>
+              <span class="nav-item">Mis Tareas</span>
+            </a>
+            <span class="tooltip">Mis Tareas</span>
+          </li>
+          <li>
+            <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
+              {% csrf_token %}
+              <button type="submit" aria-label="Logout">Cerrar sesión</button>
+            </form>
+            <span class="tooltip">Cerrar sesion</span>
+          </li>
         </ul>
-    </div>
+      </div>
 
     <div class="main-content">
         <div class="container">
             <h1>Create New User</h1>
-            <a href="{% url 'base:gestion_usuarios' %}" class="cancel-btn">Cancel</a> <!-- Cancel Button -->
-            <form method="POST" action="{% url 'base:crear_usuario' %}">
+            <form method="POST" action="{% url 'base:crear-usuario' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Create User</button>
             </form>
-            <a href="{% url 'base:gestion-usuarios' %}" class="cancel-btn">Cancel</a> <!-- Cancel Button -->
+            <a href="{% url 'base:gestion_usuarios' %}" class="cancel-btn">Cancel</a> <!-- Cancel Button -->
         </div>
     </div>
 

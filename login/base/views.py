@@ -54,24 +54,11 @@ def gestion_crearusuario(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'User created successfully!')
-            return redirect('gestion-usuarios')
+            return redirect('base:gestion_usuarios')
     else:
         form = WorkmateUserCreationForm()
     
-    return render(request, "gestion-usuarios.html", {'form': form})
-
-@login_required
-def crear_usuario(request):
-    if request.method == 'POST':
-        form = WorkmateUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'User created successfully!')
-            return redirect('base:gestion-usuarios') 
-    else:
-        form = WorkmateUserCreationForm()
-    
-    return render(request, 'crear-usuario.html', {'form': form})
+    return render(request, "crear-usuario.html", {'form': form})
 
 def editar_usuario(request, user_id):
     user = get_object_or_404(workmateUser, id=user_id)

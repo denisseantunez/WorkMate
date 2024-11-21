@@ -26,6 +26,7 @@ class Tasks(models.Model):
     
     title = models.TextField(max_length = 300, blank=False)
     description = models.TextField(max_length = 600, blank=False)
+    datelimit = models.DateTimeField()
     category = models.CharField(max_length = 20,choices=Categories)
     priority = models.IntegerField(default=Urgency.LV1, choices=Urgency, blank=False)
     notes = models.TextField(max_length = 300, blank=True)
