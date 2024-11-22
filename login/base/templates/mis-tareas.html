@@ -71,13 +71,14 @@
       <div class="user-grid">
         <div class=""user-card">
           {% for mytask in mytasks %}
-          <h3>{{ task.title }}</h3>
-              <p> Description: {{ mytask.description }}</p>
-              <p> Category: {{ mytask.category }}</p>
-              <p> Priority: Level {{ mytask.priority }}</p>
-              <p> Assigned to: {{mytask.user.first_name}} {{ mytask.user.last_name }}</p>
-              <p> Progress: {{ mytask.progress}}</p>
-        </div>
+          <div class="user-card">
+              <h3>{{ mytask.title }}</h3>
+              <p>Description: {{ mytask.description }}</p>
+              <p>Category: {{ mytask.category }}</p>
+              <p>Priority: Level {{ mytask.priority }}</p>
+              <p>Assigned to: {{ mytask.user.first_name }} {{ mytask.user.last_name }}</p>
+              <p>Progress: {{ mytask.progress }}</p>
+          </div>
           {% empty %}
           <p>No tasks assigned at the moment.</p>
           {% endfor %}

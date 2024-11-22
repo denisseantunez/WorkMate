@@ -38,7 +38,7 @@ def crear_nueva_tarea(request):
 
 @login_required
 def mis_tareas(request):
-    mytasks = Tasks.objects.all()
+    mytasks = Tasks.objects.filter(user=request.user)
     return render(request, "mis-tareas.html", {'mytasks': mytasks})
 
 @login_required
