@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User - WorkMate!</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">        
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>    
 </head>
 <body>
     <div class="sidebar">
@@ -38,18 +40,21 @@
     </div>
 
     <div class="main-content">
-        <div class="container">
-            <h1>Edit User: {{ user.username }}</h1>
-
-            <form method="POST" action="{% url 'base:gestion_usuarios' %}">
-
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Save Changes</button>
-                <a href="{% url 'base:gestion_usuarios' %}" class="cancel-button">Cancel</a>
-            </form>
+        <div class="container mt-4">
+          <h1>Edit User</h1>
+          <form method="POST" action="{% url 'base:gestion_usuarios' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+            <a href="{% url 'base:gestion_tareas' %}" class="btn btn-secondary btn-sm">Cancel</a>
+          </form>
         </div>
-    </div>
+      </div>
+  
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
         let btn = document.querySelector('#btn');

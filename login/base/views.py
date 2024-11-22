@@ -49,7 +49,7 @@ def crear_nueva_tarea(request):
 
 @login_required
 def mis_tareas(request):
-    mytasks = Tasks.objects.all()
+    mytasks = Tasks.objects.filter(user=request.user)
     return render(request, "mis-tareas.html", {'mytasks': mytasks})
 
 @login_required
@@ -97,16 +97,17 @@ def crear_tarea(request):
         form = WorkmateTaskCreationForm()
     return render(request, 'crear-nueva-tarea.html', {'form': form})
 
+
+
 @login_required
 def editar_tarea(request, task_id):
     task = get_object_or_404(Tasks, id=task_id)
-
     if request.method == 'POST':
         form = WorkmateTaskCreationForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
             messages.success(request, 'Task updated successfully!')
-            return redirect('gestion_tareas') 
+            return redirect('base:gestion_tareas')
     else:
-        form = WorkmateTaskCreationForm(instance=task) 
+        form = WorkmateTaskCreationForm(instance=task)
     return render(request, 'editar-tarea.html', {'form': form, 'task': task})

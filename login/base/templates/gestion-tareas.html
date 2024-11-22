@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Tasks</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">        
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
@@ -66,66 +66,45 @@
 
     <div class="main-content">
       <div class="container mt-4">
-          <h1>Manage Tasks</h1>
-          <a href="{% url 'base:crear-tarea' %}" class="btn btn-primary mb-3">Create Task</a>
-          <div class="row">
-              {% for task in tasks %}
-              <div class="col-md-4 mb-4">
-                <div class="card h-100 border-primary mb-3">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ task.title }}</h5>
-                    <p class="card-text">Description: {{ task.description }}</p>
-                    <p class="card-text">Category: {{ task.category }}</p>
-                    <p class="card-text">Date limit: {{ task.datelimit }}</p>
-                    <p class="card-text">Priority: Level {{ task.priority }}</p>
-                    <p class="card-text">Assigned to: {{ task.user.first_name }} {{ task.user.last_name }}</p>
-                    <p class="card-text">Progress: {{ task.progress }}</p>
-                    <button class="btn btn-secondary" onclick="openEditPane({{ task.id }})">Edit</button>
-                  </div>
-                </div>
+        <h1>Manage Tasks</h1>
+        <a href="{% url 'base:crear-tarea' %}" class="btn btn-primary btn-sm mb-3">Create Task</a>
+        <div class="row">
+          {% for task in tasks %}
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 border-primary mb-3">
+              <div class="card-body">
+                <h5 class="card-title">{{ task.title }}</h5>
+                <p class="card-text">Description: {{ task.description }}</p>
+                <p class="card-text">Category: {{ task.category }}</p>
+                <p class="card-text">Date limit: {{ task.datelimit }}</p>
+                <p class="card-text">Priority: Level {{ task.priority }}</p>
+                <p class="card-text">Assigned to: {{ task.user.first_name }} {{ task.user.last_name }}</p>
+                <p class="card-text">Progress: {{ task.get_progress_display }}</p>
+                <a href="{% url 'base:editar_tarea' task.id %}" class="btn btn-secondary btn-sm">Edit</a>
               </div>
-              {% empty %}
-              <div class="col-12">
-                <h3>No tasks available</h3>
-              </div>
-              {% endfor %}
+            </div>
           </div>
-
-          <div id="edit-pane" class="sliding-pane" style="display: none;">
-              <form method="POST" action="{% url 'base:gestion_tareas' %}">
-                  {% csrf_token %}
-                  {{ form.as_p }}
-                  <input type="hidden" name="task_id" id="task-id-input">
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
-                  <button type="button" class="btn btn-secondary" onclick="closeEditPane()">Cancel</button>
-              </form>
+          {% empty %}
+          <div class="col-12">
+            <h3>No tasks available</h3>
           </div>
+          {% endfor %}
+        </div>
       </div>
-  </div>
+    </div>
 
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <script>
-    function openEditPane(taskId) {
-        document.getElementById("task-id-input").value = taskId;
-        document.getElementById("edit-pane").style.display = 'block';
-    }
+    <script>
+      let btn = document.querySelector('#btn');
+      let sidebar = document.querySelector('.sidebar');
 
-    function closeEditPane() {
-        document.getElementById("edit-pane").style.display = 'none';
-    }
-  </script>
-
-  <script>
-    let btn = document.querySelector('#btn');
-    let sidebar = document.querySelector('.sidebar');
-
-    btn.onclick = function () {
-      sidebar.classList.toggle('active');
-    };
-  </script>
+      btn.onclick = function () {
+        sidebar.classList.toggle('active');
+      };
+    </script>
   </body>
 </html>
