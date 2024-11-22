@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkMate!</title>
+    <title>Manage Tasks</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">        
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="sidebar">
@@ -35,52 +36,58 @@
         <li>
           <a href="/gestion-tareas/">
             <i class="bx bx-task"></i>
-            <span class="nav-item">Gestion de Tareas</span>
+            <span class="nav-item">Manage Tasks</span>
           </a>
-          <span class="tooltip">Gestion de Tareas</span>
+          <span class="tooltip">Manage Tasks</span>
         </li>
         <li>
           <a href="/gestion-usuarios/">
             <i class="bx bxs-user-account"></i>
-            <span class="nav-item">Gestion de Usuarios</span>
+            <span class="nav-item">Manage Users</span>
           </a>
-          <span class="tooltip">Gestion de Usuarios</span>
+          <span class="tooltip">Manage Users</span>
         </li>
         <li>
           <a href="/mis-tareas/">
             <i class="bx bxs-notepad"></i>
-            <span class="nav-item">Mis Tareas</span>
+            <span class="nav-item">My Tasks</span>
           </a>
-          <span class="tooltip">Mis Tareas</span>
+          <span class="tooltip">My Tasks</span>
         </li>
         <li>
           <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
             {% csrf_token %}
-            <button type="submit" aria-label="Logout">Cerrar sesión</button>
+            <button type="submit" aria-label="Logout">Log out</button>
           </form>
-          <span class="tooltip">Cerrar sesion</span>
+          <span class="tooltip">Log out</span>
         </li>
       </ul>
     </div>
 
     <div class="main-content">
-      <div class="container">
-          <h1>Gestion de Tareas</h1>
-          <a href="{% url 'base:crear-tarea' %}" class="edit-btn">Crear Tarea</a>
-          <div class="user-grid">
+      <div class="container mt-4">
+          <h1>Manage Tasks</h1>
+          <a href="{% url 'base:crear-tarea' %}" class="btn btn-primary mb-3">Create Task</a>
+          <div class="row">
               {% for task in tasks %}
-              <div class="user-card">
-                  <h3>{{ task.title }}</h3>
-                  <p> Description: {{ task.description }}</p>
-                  <p> Category: {{ task.category }}</p>
-                  <p> Date limit: {{ task.datelimit }}</p>
-                  <p> Priority: Level {{ task.priority }}</p>
-                  <p> Assigned to: {{ task.user.first_name }} {{ task.user.last_name }}</p>
-                  <p> Progress: {{ task.progress }}</p>
-                  <button class="edit-btn" onclick="openEditPane({{ task.id }})">Edit</button>
+              <div class="col-md-4 mb-4">
+                <div class="card h-100 border-primary mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">Description: {{ task.description }}</p>
+                    <p class="card-text">Category: {{ task.category }}</p>
+                    <p class="card-text">Date limit: {{ task.datelimit }}</p>
+                    <p class="card-text">Priority: Level {{ task.priority }}</p>
+                    <p class="card-text">Assigned to: {{ task.user.first_name }} {{ task.user.last_name }}</p>
+                    <p class="card-text">Progress: {{ task.progress }}</p>
+                    <button class="btn btn-secondary" onclick="openEditPane({{ task.id }})">Edit</button>
+                  </div>
+                </div>
               </div>
               {% empty %}
-              <h3>No tasks available</h3>
+              <div class="col-12">
+                <h3>No tasks available</h3>
+              </div>
               {% endfor %}
           </div>
 
@@ -89,12 +96,18 @@
                   {% csrf_token %}
                   {{ form.as_p }}
                   <input type="hidden" name="task_id" id="task-id-input">
-                  <button type="submit">Save Changes</button>
-                  <button type="button" onclick="closeEditPane()">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                  <button type="button" class="btn btn-secondary" onclick="closeEditPane()">Cancel</button>
               </form>
           </div>
       </div>
   </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <script>
     function openEditPane(taskId) {
         document.getElementById("task-id-input").value = taskId;
@@ -105,7 +118,6 @@
         document.getElementById("edit-pane").style.display = 'none';
     }
   </script>
-  </body>
 
   <script>
     let btn = document.querySelector('#btn');
@@ -115,4 +127,5 @@
       sidebar.classList.toggle('active');
     };
   </script>
+  </body>
 </html>

@@ -148,16 +148,14 @@
   display: none;
 }
 
-.main-content {
+./*main-content {
   position: relative;
   background-color: #eee;
   min-height: 100vh;
-  top: 0;
-  left: 80px;
-  transition: all 0.5s ease;
-  width: calc(100% - 80px);
+  margin-left: 80px;
+  transition: all 0.1 ease;
   padding: 1rem;
-}
+}*/
 
 /* Custom styles for user grid layout */
 .user-grid {
@@ -203,9 +201,9 @@
 .container {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive two-column layout */
+  /grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); / Responsive two-column layout */
   max-width: 1200px; /* Center content and limit max width */
-  width: 100%;
+  width: 200%;
   background-color: #fff;
   padding: 30px;
   border-radius: 8px;
@@ -272,69 +270,6 @@ a:hover {
 	top:1px;
 }
 
-.slide-pane {
-  position: fixed;
-  top: 0;
-  right: -100%; /* Initially off-screen */
-  width: 400px;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
-  transition: right 0.3s ease;
-  z-index: 1000;
-  padding: 20px;
-}
-
-.slide-pane.active {
-  right: 0; /* Slides in */
-}
-
-.pane-content {
-  padding: 20px;
-}
-
-.edit-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.edit-btn:hover {
-  background-color: #0056b3;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-form input, form select, form textarea {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  outline: none;
-}
-
-form input[type="submit"], form button {
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-form input[type="submit"]:hover, form button:hover {
-  background-color: #0056b3;
-}
 .hidden {
   display: none
 }

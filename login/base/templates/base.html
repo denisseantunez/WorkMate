@@ -6,6 +6,8 @@
     <title>WorkMate!</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">        
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="sidebar">
@@ -35,39 +37,106 @@
         <li>
           <a href="/gestion-tareas/">
             <i class="bx bx-task"></i>
-            <span class="nav-item">Gestion de Tareas</span>
+            <span class="nav-item">Manage Tasks</span>
           </a>
-          <span class="tooltip">Gestion de Tareas</span>
+          <span class="tooltip">Manage Tasks</span>
         </li>
         <li>
           <a href="/gestion-usuarios/">
             <i class="bx bxs-user-account"></i>
-            <span class="nav-item">Gestion de Usuarios</span>
+            <span class="nav-item">Manage Users</span>
           </a>
-          <span class="tooltip">Gestion de Usuarios</span>
+          <span class="tooltip">Manage Users</span>
         </li>
         <li>
           <a href="/mis-tareas/">
             <i class="bx bxs-notepad"></i>
-            <span class="nav-item">Mis Tareas</span>
+            <span class="nav-item">My Tasks</span>
           </a>
-          <span class="tooltip">Mis Tareas</span>
+          <span class="tooltip">My Tasks</span>
         </li>
         <li>
           <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
             {% csrf_token %}
-            <button type="submit" aria-label="Logout">Cerrar sesión</button>
+            <button type="submit" aria-label="Logout">Log out</button>
           </form>
-          <span class="tooltip">Cerrar sesion</span>
+          <span class="tooltip">Log out</span>
         </li>
       </ul>
     </div>
 
     <div class="main-content">
-      <div class="container">
+      <div class="container mt-12">
         <h1>Dashboard</h1>
+        <div class="container mt-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Tasks</div>
+                <div class="card-body">
+                  <h5 class="card-title">Total</h5>
+                  <p class="card-text">{{ num_tasks }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-white bg-info mb-3">
+                <div class="card-header">Team Members</div>
+                <div class="card-body">
+                  <h5 class="card-title">Total</h5>
+                  <p class="card-text">{{ num_team_members }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-white bg-success mb-3">
+                <div class="card-header">Completed Tasks</div>
+                <div class="card-body">
+                  <h5 class="card-title">Total</h5>
+                  <p class="card-text">{{ completed_tasks }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card text-white bg-warning mb-3">
+                <div class="card-header">In Progress Tasks</div>
+                <div class="card-body">
+                  <h5 class="card-title">Total</h5>
+                  <p class="card-text">{{ in_progress_tasks }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Not Started Tasks</div>
+                <div class="card-body">
+                  <h5 class="card-title">Total</h5>
+                  <p class="card-text">{{ not_started_tasks }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-3">
+                <div class="card-header">Quick Actions</div>
+                <div class="card-body">
+                  <a href="/crear-tarea/" class="btn btn-primary">Create New Task</a>
+                  <a href="/crear-usuario/" class="btn btn-secondary">Create New User</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+     <!-- Bootstrap JS and dependencies -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+
   </body>
 
   <script>

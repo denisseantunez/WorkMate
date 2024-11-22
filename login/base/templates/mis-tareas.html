@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorkMate!</title>
+  <title>My Tasks</title>
   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,63 +38,74 @@
       <li>
         <a href="/gestion-tareas/">
           <i class="bx bx-task"></i>
-          <span class="nav-item">Gestion de Tareas</span>
+          <span class="nav-item">Manage Tasks</span>
         </a>
-        <span class="tooltip">Gestion de Tareas</span>
+        <span class="tooltip">Manage Tasks</span>
       </li>
       <li>
         <a href="/gestion-usuarios/">
           <i class="bx bxs-user-account"></i>
-          <span class="nav-item">Gestion de Usuarios</span>
+          <span class="nav-item">Manage Users</span>
         </a>
-        <span class="tooltip">Gestion de Usuarios</span>
+        <span class="tooltip">Manage Users</span>
       </li>
       <li>
         <a href="/mis-tareas/">
           <i class="bx bxs-notepad"></i>
-          <span class="nav-item">Mis Tareas</span>
+          <span class="nav-item">My Tasks</span>
         </a>
-        <span class="tooltip">Mis Tareas</span>
+        <span class="tooltip">My Tasks</span>
       </li>
       <li>
         <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
           {% csrf_token %}
-          <button type="submit" aria-label="Logout">Cerrar sesión</button>
+          <button type="submit" aria-label="Logout">Log out</button>
         </form>
-        <span class="tooltip">Cerrar sesion</span>
+        <span class="tooltip">Log out</span>
       </li>
     </ul>
   </div>
 
   <div class="main-content">
-    <div class="container">
-      <h1>Mis Tareas</h1>
-      <div class="user-grid">
-        <div class=""user-card">
-          {% for mytask in mytasks %}
-          <h3>{{ task.title }}</h3>
-              <p> Description: {{ mytask.description }}</p>
-              <p> Category: {{ mytask.category }}</p>
-              <p> Priority: Level {{ mytask.priority }}</p>
-              <p> Assigned to: {{mytask.user.first_name}} {{ mytask.user.last_name }}</p>
-              <p> Progress: {{ mytask.progress}}</p>
+    <div class="container mt-4">
+      <h1>My Tasks</h1>
+      <div class="row">
+        {% for mytask in mytasks %}
+        <div class="col-md-4 mb-4">
+          <div class="card border-warning h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ mytask.title }}</h5>
+              <p class="card-text">Description: {{ mytask.description }}</p>
+              <p class="card-text">Category: {{ mytask.category }}</p>
+              <p class="card-text">Priority: Level {{ mytask.priority }}</p>
+              <p class="card-text">Assigned to: {{ mytask.user.first_name }} {{ mytask.user.last_name }}</p>
+              <p class="card-text">Progress: {{ mytask.get_progress_display }}</p>
+            </div>
+          </div>
         </div>
-          {% empty %}
+        {% empty %}
+        <div class="col-12">
           <p>No tasks assigned at the moment.</p>
-          {% endfor %}
         </div>
+        {% endfor %}
       </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    let btn = document.querySelector('#btn');
+    let sidebar = document.querySelector('.sidebar');
+
+    btn.onclick = function () {
+      sidebar.classList.toggle('active');
+    };
+  </script>
+
 </body>
-
-<script>
-  let btn = document.querySelector('#btn');
-  let sidebar = document.querySelector('.sidebar');
-
-  btn.onclick = function () {
-    sidebar.classList.toggle('active');
-  };
-</script>
 
 </html>

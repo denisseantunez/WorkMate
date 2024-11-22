@@ -6,8 +6,15 @@
     <title>Create User - WorkMate!</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+     <!-- Bootstrap JS and dependencies -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
     <div class="sidebar">
         <div class="top">
           <div class="logo">
@@ -35,46 +42,54 @@
           <li>
             <a href="/gestion-tareas/">
               <i class="bx bx-task"></i>
-              <span class="nav-item">Gestion de Tareas</span>
+              <span class="nav-item">Manage Tasks</span>
             </a>
-            <span class="tooltip">Gestion de Tareas</span>
+            <span class="tooltip">Manage Tasks</span>
           </li>
           <li>
             <a href="/gestion-usuarios/">
               <i class="bx bxs-user-account"></i>
-              <span class="nav-item">Gestion de Usuarios</span>
+              <span class="nav-item">Manage Users</span>
             </a>
-            <span class="tooltip">Gestion de Usuarios</span>
+            <span class="tooltip">Manage Users</span>
           </li>
           <li>
             <a href="/mis-tareas/">
               <i class="bx bxs-notepad"></i>
-              <span class="nav-item">Mis Tareas</span>
+              <span class="nav-item">My Tasks</span>
             </a>
-            <span class="tooltip">Mis Tareas</span>
+            <span class="tooltip">My Tasks</span>
           </li>
           <li>
             <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
               {% csrf_token %}
-              <button type="submit" aria-label="Logout">Cerrar sesión</button>
+              <button type="submit" aria-label="Logout">Log out</button>
             </form>
-            <span class="tooltip">Cerrar sesion</span>
+            <span class="tooltip">Log out</span>
           </li>
         </ul>
       </div>
 
-    <div class="main-content">
-        <div class="container">
-            <h1>Create New User</h1>
-            <form method="POST" action="{% url 'base:crear-usuario' %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Create User</button>
-            </form>
-            <a href="{% url 'base:gestion_usuarios' %}" class="cancel-btn">Cancel</a> <!-- Cancel Button -->
+    
+      <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; max-width: 900px; width: 100%;">
+        <div class="card w-100">
+            <div class="card-body">
+                <h1 class="mb-4 text-center">Create New User</h1>
+                <form method="POST" action="{% url 'base:crear-usuario' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.as_p }}
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                        <button type="submit" class="btn btn-primary">Create user</button>
+                        <a href="{% url 'base:gestion_usuarios' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
+  
     <script>
         let btn = document.querySelector('#btn');
         let sidebar = document.querySelector('.sidebar');

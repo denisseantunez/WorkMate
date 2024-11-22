@@ -33,37 +33,37 @@
         <li>
           <a href="/gestion-tareas/">
             <i class="bx bx-task"></i>
-            <span class="nav-item">Gestion de Tareas</span>
+            <span class="nav-item">Manage Tasks</span>
           </a>
-          <span class="tooltip">Gestion de Tareas</span>
+          <span class="tooltip">Manage Tasks</span>
         </li>
         <li>
           <a href="/gestion-usuarios/">
             <i class="bx bxs-user-account"></i>
-            <span class="nav-item">Gestion de Usuarios</span>
+            <span class="nav-item">Manage Users</span>
           </a>
-          <span class="tooltip">Gestion de Usuarios</span>
+          <span class="tooltip">Manage Users</span>
         </li>
         <li>
           <a href="/mis-tareas/">
             <i class="bx bxs-notepad"></i>
-            <span class="nav-item">Mis Tareas</span>
+            <span class="nav-item">My Tasks</span>
           </a>
-          <span class="tooltip">Mis Tareas</span>
+          <span class="tooltip">My Tasks</span>
         </li>
         <li>
           <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
             {% csrf_token %}
-            <button type="submit" aria-label="Logout">Cerrar sesión</button>
+            <button type="submit" aria-label="Logout">Log out</button>
           </form>
-          <span class="tooltip">Cerrar sesion</span>
+          <span class="tooltip">Log out</span>
         </li>
       </ul>
     </div>
 
     <div class="main-content">
       <div class="container">
-        <h1>Gestion de Usuarios</h1>
+        <h1>Manage Users</h1>
         <div class="user-grid">
           {% for user in users %}
           <div class="user-card">

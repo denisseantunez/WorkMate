@@ -8,7 +8,18 @@ from .form import WorkmateUserCreationForm, WorkmateTaskCreationForm
 
 @login_required
 def home(request):
-    return render(request, "base.html", {})
+    num_tasks = Tasks.objects.count()
+    num_team_members = workmateUser.objects.count()
+    completed_tasks = Tasks.count_by_progress(Tasks.Completion.Completed)
+    in_progress_tasks = Tasks.count_by_progress(Tasks.Completion.Incomplete)
+    not_started_tasks = Tasks.count_by_progress(Tasks.Completion.NotStarted)
+    return render(request, 'base.html', {
+        'num_tasks': num_tasks,
+        'num_team_members': num_team_members,
+        'completed_tasks': completed_tasks,
+        'in_progress_tasks': in_progress_tasks,
+        'not_started_tasks': not_started_tasks,
+    })
 
 @login_required
 def gestion_tareas(request):

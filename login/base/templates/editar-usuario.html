@@ -25,13 +25,13 @@
         </div>
         <ul>
             <li><a href="/"><i class="bx bxs-grid-alt"></i><span class="nav-item">Dashboard</span></a></li>
-            <li><a href="/gestion-tareas/"><i class="bx bx-task"></i><span class="nav-item">Gestion de Tareas</span></a></li>
-            <li><a href="/gestion-usuarios/"><i class="bx bxs-user-account"></i><span class="nav-item">Gestion de Usuarios</span></a></li>
-            <li><a href="/mis-tareas/"><i class="bx bxs-notepad"></i><span class="nav-item">Mis Tareas</span></a></li>
+            <li><a href="/gestion-tareas/"><i class="bx bx-task"></i><span class="nav-item">Manage Tasks</span></a></li>
+            <li><a href="/gestion-usuarios/"><i class="bx bxs-user-account"></i><span class="nav-item">Manage Users</span></a></li>
+            <li><a href="/mis-tareas/"><i class="bx bxs-notepad"></i><span class="nav-item">My Tasks</span></a></li>
             <li>
                 <form method="POST" action="{% url 'base:logout' %}" class="logout-form">
                     {% csrf_token %}
-                    <button type="submit" aria-label="Logout">Cerrar sesión</button>
+                    <button type="submit" aria-label="Logout">Log out</button>
                 </form>
             </li>
         </ul>

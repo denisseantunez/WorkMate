@@ -17,11 +17,11 @@ class Tasks(models.Model):
         NotStarted = 3, "Not started"
 
     Categories = {
-        ("TECH", "Tecnologico"),
-        ("ADMIN", "Administrativo"),
-        ("DEV", "Desarrollo"),
+        ("TECH", "Technological"),
+        ("ADMIN", "Administrative"),
+        ("DEV", "Development"),
         ("TEAM", "WorkMate Internal"),
-        ("OTHER", "Otro/No Listado")
+        ("OTHER", "Other")
     }
     
     title = models.TextField(max_length = 300, blank=False)
@@ -36,6 +36,9 @@ class Tasks(models.Model):
     def __str__(self):
         return self.title, self.description, self.category, self.priority, self.notes, self.user.first_name, self.user.last_name, self.progress
 
+    @classmethod
+    def count_by_progress(cls, progress_status):
+        return cls.objects.filter(progress=progress_status).count()
 
 class TaskProfile(models.Model):
     user = models.ForeignKey(workmateUser, on_delete=models.CASCADE)
