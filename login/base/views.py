@@ -49,8 +49,36 @@ def crear_nueva_tarea(request):
 
 @login_required
 def mis_tareas(request):
+    filter_category = request.GET.get('category', '')
+    filter_priority = request.GET.get('priority', '')
+    filter_progress = request.GET.get('progress', '')
+
+    categories = [choice[0] for choice in Tasks.Categories]
+    # idk why i made them class based i think i just made things harder for myself in that regard
+    priorities = Tasks.Urgency.choices
+    progressing = Tasks.Completion.choices
+
     mytasks = Tasks.objects.filter(user=request.user)
-    return render(request, "mis-tareas.html", {'mytasks': mytasks})
+
+    if filter_category and filter_category != '':
+        mytasks = mytasks.filter(category=filter_category)
+
+    if filter_priority and filter_priority != '':
+        mytasks = mytasks.filter(priority=filter_priority)
+
+    if filter_progress and filter_progress != '':
+        mytasks = mytasks.filter(priority=filter_progress)
+
+    return render(request, "mis-tareas.html", {
+        'mytasks': mytasks,
+        'categories': categories,
+        'priorities': priorities,
+        'progressing': progressing,
+        'filter_category': filter_category,
+        'filter_priority': filter_priority,
+        'filter_progress': filter_progress
+    })
+
 
 @login_required
 def gestion_usuarios(request):
