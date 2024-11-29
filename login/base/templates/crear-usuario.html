@@ -39,6 +39,7 @@
             </a>
             <span class="tooltip">Dashboard</span>
           </li>
+          {% if perms.tasks.view_task %}
           <li>
             <a href="/gestion-tareas/">
               <i class="bx bx-task"></i>
@@ -46,6 +47,8 @@
             </a>
             <span class="tooltip">Manage Tasks</span>
           </li>
+          {% endif %}
+          {% if perms.user.edit_user %} 
           <li>
             <a href="/gestion-usuarios/">
               <i class="bx bxs-user-account"></i>
@@ -53,6 +56,7 @@
             </a>
             <span class="tooltip">Manage Users</span>
           </li>
+          {% endif %}
           <li>
             <a href="/mis-tareas/">
               <i class="bx bxs-notepad"></i>
